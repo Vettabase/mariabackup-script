@@ -69,26 +69,26 @@ You have options for full and incremental backups. Having two sets of options al
 #----------define backup options------------
 #incremental options
 declare -a backup_options_inc=(
-		"--backup"
-		"--user=$user"
-		"--password=$password"
-		"--extra-lsndir=$extra_lsndir"
-		"--incremental-basedir=$extra_lsndir"
-		"--stream=xbstream"
-		"--slave-info"
-		"--parallel=1"
-	    	)
+	"--backup"
+	"--user=$user"
+	"--password=$password"
+	"--extra-lsndir=$extra_lsndir"
+	"--incremental-basedir=$extra_lsndir"
+	"--stream=xbstream"
+	"--slave-info"
+	"--parallel=1"
+	)
 
 #full backup options
 declare -a backup_options_full=(
-    "--backup"
-    "--user=$user"
-    "--password=$password"
-    "--target-dir=$fullbackuplocation"
-    "--extra-lsndir=$extra_lsndir"
-    "--stream=xbstream"
-		"--slave-info"
-		"--parallel=5"
+        "--backup"
+        "--user=$user"
+        "--password=$password"
+        "--target-dir=$fullbackuplocation"
+        "--extra-lsndir=$extra_lsndir"
+        "--stream=xbstream"
+	"--slave-info"
+	"--parallel=1"
         )
 
 ```
