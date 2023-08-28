@@ -1,7 +1,7 @@
 # mariabackup-script
 ## Full and incremental script along with prepare script to uncompress and apply incremental backups to full backup ##
 
-Parts of the scirpts are standard to Rehat/yum distros which means you may find that you need to change tools used in the script to better suit your OS
+Parts of the scripts are standard to Rehat/yum distros which means you may find that you need to change tools used in the script to better suit your OS
 
 ### This script has the following features: ###
 
@@ -10,6 +10,15 @@ Parts of the scirpts are standard to Rehat/yum distros which means you may find 
 * Email on failure (mailx)
 * Auto removal of failed incremental backups
 * Prepare script that loops through incremental backups to apply new changes to full backup
+
+### How to use ###
+
+```bash
+
+bash mariabackup.bash
+
+bash prepare.bash /media/backups/dateofback
+```
 
 ### Create the backup user: ###
 
