@@ -1,5 +1,5 @@
 #!/bin/bash
-#Only to be run if a incremental backup is taken, if not then run prepare script manually
+#Only to be run if an incremental backup is taken, if not then run mariabackup --prepare command manually
 #To run do 
 #bash prepare.bash /path/to/backup/directory 
 #script will then look for fullbackup folder and loop through the incremental backups in order
