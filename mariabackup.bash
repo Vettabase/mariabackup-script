@@ -26,15 +26,15 @@ backupdays=0
 #----------define backup options------------
 #incremental options
 declare -a backup_options_inc=(
-		"--backup"
-		"--user=$user"
-		"--password=$password"
-		"--extra-lsndir=$extra_lsndir"
-		"--incremental-basedir=$extra_lsndir"
-		"--stream=xbstream"
-		"--slave-info"
-		"--parallel=1"
-		)
+	"--backup"
+	"--user=$user"
+	"--password=$password"
+	"--extra-lsndir=$extra_lsndir"
+	"--incremental-basedir=$extra_lsndir"
+	"--stream=xbstream"
+	"--slave-info"
+	"--parallel=1"
+	)
 
 #full backup options
 declare -a backup_options_full=(
@@ -44,8 +44,8 @@ declare -a backup_options_full=(
         "--target-dir=$fullbackuplocation"
         "--extra-lsndir=$extra_lsndir"
         "--stream=xbstream"
-		"--slave-info"
-		"--parallel=1"
+	"--slave-info"
+	"--parallel=1"
         )
 
 #------------variables------------
