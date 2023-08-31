@@ -26,3 +26,10 @@ do
     gunzip -c $DIR/* | mbstream -x
     mariabackup --prepare --target-dir=$FULL_BACKUP_DIR --incremental-dir=$DIR 2>> $backupdir/perpare.log
 done
+
+#delete incrmental uncompressed files after they are appiled to fullbackup to save space
+for DIR in $INCREMENTAL_BACKUP_DIR
+do
+    cd $DIR
+    find . ! -name 'incremental.backup.gz' | xargs rm -rf
+done
