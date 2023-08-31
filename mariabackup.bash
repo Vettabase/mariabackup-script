@@ -15,7 +15,7 @@ password=password
 
 #emaillist, spaces in-between, no commas
 emails="harry.pask@hotmail.com"
-fromemail="mariabackupalerts@6dglinux.com"
+fromemail="mariabackup@email.com"
 
 #number of days to keep backups
 #0= just today's backup | 1= today and yesterday | 2=today,yesterday,day before etc
