@@ -27,6 +27,7 @@ do
     if [[ $checkstatus -eq 1 ]]; then
         cd $DIR
         gunzip -c $DIR/* | mbstream -x
+        echo "Applying $DIR incremental updates to fullbackup"
         mariabackup --prepare --target-dir=$FULL_BACKUP_DIR --incremental-dir=$DIR 2>> $preparelog
     else
         echo "$(date +'%Y-%m-%d %H:%M:%S') Last incremental failed to run, please check $preparelog for more details"
@@ -42,6 +43,7 @@ do
     cd $DIR
     find $DIR/* ! -name 'incremental.backup.gz' | xargs rm -rf
     echo "$(date +'%Y-%m-%d %H:%M:%S') Deleted uncompressed files for incremental $DIR" >> $preparelog
+    echo "Deleting uncompressed $DIR leaveing zipped file alone"
 done
 
 lastcheckstatus=$(grep -c "completed OK" $preparelog)
@@ -51,6 +53,9 @@ includefull=$(($incbackups + 1))
 
 if [[ $lastcheckstatus -eq $includefull ]]; then
     echo "$(date +'%Y-%m-%d %H:%M:%S') Prepare completed successfully and ready to restore from backup directory $FULL_BACKUP_DIR"
+    echo "Restore with either command:"
+    echo "mariabackup --copy-back --target-dir=$FULL_BACKUP_DIR"
+    echo "mariabackup --move-back --target-dir=$FULL_BACKUP_DIR"
 else
     echo "$(date +'%Y-%m-%d %H:%M:%S') Prepare failed, check $preparelog for more details. number of backups did not equal number of prepared backups. If you are running this a second time and didn't delete prepare.log then ignore error and check $preparelog"
 fi
