@@ -5,7 +5,7 @@
 #------customize main settings-------
 
 #create user 'backup'@'localhost' identified by 'password';
-#grant reload,process,lock tables,binlog monitor,connection admin,slave monitor on *.* to 'backup'@'localhost';
+#grant select,reload,process,lock tables,binlog monitor,connection admin,slave monitor on *.* to 'backup'@'localhost';
 
 # Define the backup directory
 backup_dir=/media/backups/
@@ -15,25 +15,28 @@ user=backup
 password=password
 
 #emaillist, spaces in-between, no commas
-emails="email@emaildomain.com"
-fromemail="mariabackupalerts@emaildomain.com"
+emails="harry.pask@hotmail.com"
+fromemail="mariabackupalerts@6dglinux.com"
 
 #number of days to keep backups
 #0= just today's backup | 1= today and yesterday | 2=today,yesterday,day before etc
-backupdays=0
+backupdays=10
+
+#dump table sturture per for single database restores (full innodb databases only)
+dumpstructure='y'
 
 #----------define backup options------------
 #incremental options
 declare -a backup_options_inc=(
-	"--backup"
-	"--user=$user"
- 	"--password=$password"
-	"--extra-lsndir=$extra_lsndir"
-	"--incremental-basedir=$extra_lsndir"
-	"--stream=xbstream"
-	"--slave-info"
-	"--parallel=1"
-	)
+		"--backup"
+		"--user=$user"
+		"--password=$password"
+		"--extra-lsndir=$extra_lsndir"
+		"--incremental-basedir=$extra_lsndir"
+		"--stream=xbstream"
+		"--slave-info"
+		"--parallel=1"
+		)
 
 #full backup options
 declare -a backup_options_full=(
@@ -43,12 +46,14 @@ declare -a backup_options_full=(
         "--target-dir=$fullbackuplocation"
         "--extra-lsndir=$extra_lsndir"
         "--stream=xbstream"
-	"--slave-info"
-	"--parallel=1"
+		"--slave-info"
+		"--parallel=1"
         )
 
 #------------variables------------
 
+
+declare -a databasenames=(fire test nation test1234)
 
 # Get the current date
 current_date=$(date +"%Y-%m-%d")
@@ -66,6 +71,10 @@ incremental_folder=$current_date_folder/incr/$current_datetime
 fullbackuplocation=$current_date_folder/fullbackup
 mkdir -p $current_date_folder
 
+#table struture variables
+dumpstructurefolder=$current_date_folder/tablestructure/
+currenttimedatastructure=$(date +"%Y-%m-%d-%T"-no-data.sql)
+
 #------backup process-------
 cd $current_date_folder
 # Check if full backup file exists
@@ -74,11 +83,21 @@ if [ -f $full_backup_file ]; then
 	mkdir -p $incremental_folder
 	mariabackup "${backup_options_inc[@]}" 2>> $current_date_folder/backup.log | gzip > $incremental_folder/incremental.backup.gz
 else
-	# Perform full backup and create create $full_backup_file
+	# Perform full backup
 	mkdir -p $fullbackuplocation
 	mariabackup "${backup_options_full[@]}" 2>> $current_date_folder/backup.log | gzip > $fullbackuplocation/full_backup.gz
-	#touch $full_backup_file
-	#mv $current_date_folder/full_backup.gz $fullbackuplocation
+fi
+
+#dump table structure
+if [[ $dumpstructure == "y" ]];then
+	mkdir -p $dumpstructurefolder
+
+	for dbname in "${databasenames[@]}"
+	do
+		mkdir -p $dumpstructurefolder/$dbname/
+		#nodatasqlfile=$dumpstructurefolder/$dbname/
+		mariadb-dump -u $user -p$password -R --no-data $dbname > $dumpstructurefolder/$dbname/$currenttimedatastructure
+	done
 fi
 
 #-----Check backup was successful-------
