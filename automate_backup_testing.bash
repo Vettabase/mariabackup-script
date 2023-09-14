@@ -1,17 +1,17 @@
 #!/bin/bash
 #Only to be run if a incremental backup is taken, if not then run prepare script manually
 #To run do 
-#bash automate_backup_testing.bash 
+#bash prepare.bash /path/to/backup/directory 
 #script will then look for fullbackup folder and loop through the incremental backups in order
+#do not run if no incremental backups have been taken, run prepare manually
 
 # Set variables for the full backup folder and the incremental backup folder
 
 #where the backups are stored, backups folder is the parent and inside there should be dates each backup day
 basebackupdir="/media/backups/*"
 #if variable = testrestore, then the script will prepare the backups and then preform a restore with the --move-back option
-testrestore="$1"
+testrestore="testrestores"
 
-#change automated_dir to a directory where you want to store the checks and log files. Make sure to also make them
 
 for backup_date in $basebackupdir
 do
