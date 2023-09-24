@@ -48,6 +48,8 @@ fromemail="mariabackup@emaildomain.com"
 #0= just today's backup | 1= today and yesterday | 2=today,yesterday,day before etc
 backupdays=0
 
+#dump table sturture per for single database restores (full innodb databases only)
+dumpstructure='n'
 ```
 
 ### Add, remove or change variables in the mariabackup options ###
