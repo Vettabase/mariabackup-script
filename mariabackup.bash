@@ -23,7 +23,7 @@ fromemail="mariabackupalerts@6emaildomain.com"
 backupdays=2
 
 #dump table sturture per for single database restores (full innodb databases only)
-dumpstructure='y'
+dumpstructure='n'
 
 #----------define backup options------------
 #incremental options
