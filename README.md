@@ -92,9 +92,3 @@ declare -a backup_options_full=(
         )
 
 ```
-#### If you find backups are not deleting like they should then uncomment the following line ####
-
-```bash
-#wait so old backup has time to "age"
-#sleep 10
-```
