@@ -38,7 +38,7 @@ fi
 
 # Change directory, unzip file and run prepare fullbackup
 cd $FULL_BACKUP_DIR
-gunzip -c $FULL_BACKUP_DIR/* | mbstream -x
+unpigz -c $FULL_BACKUP_DIR/* | mbstream -x
 mariabackup --prepare --target-dir=$FULL_BACKUP_DIR 2>> $preparelog
 mv $FULL_BACKUP_DIR/full_backup.gz ..
 
