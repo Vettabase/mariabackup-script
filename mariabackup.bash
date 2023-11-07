@@ -81,11 +81,11 @@ cd $current_date_folder
 if [ -f $full_backup_file ]; then
 	# Perform incremental backup if $full_backup_file exists
 	mkdir -p $incremental_folder
-	mariabackup "${backup_options_inc[@]}" 2>> $current_date_folder/backup.log | gzip > $incremental_folder/incremental.backup.gz
+	mariabackup "${backup_options_inc[@]}" 2>> $current_date_folder/backup.log | pigz > $incremental_folder/incremental.backup.gz
 else
 	# Perform full backup
 	mkdir -p $fullbackuplocation
-	mariabackup "${backup_options_full[@]}" 2>> $current_date_folder/backup.log | gzip > $fullbackuplocation/full_backup.gz
+	mariabackup "${backup_options_full[@]}" 2>> $current_date_folder/backup.log | pigz > $fullbackuplocation/full_backup.gz
 fi
 
 #dump table structure
