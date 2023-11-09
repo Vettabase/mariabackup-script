@@ -1,7 +1,7 @@
 # mariabackup-script
 ## Full and incremental script along with prepare script to uncompress and apply incremental backups to full backup ##
 
-Parts of the scripts are standard to Rehat/yum distros which means you may find that you need to change tools used in the script to better suit your OS
+Parts of the scripts are standard to Rehat/yum distros which means you may find that you need to change tools used in the script to better suit your OS. You may need to install pigz, or change it to gzip and gunzip.
 
 ### This script has the following features: ###
 
