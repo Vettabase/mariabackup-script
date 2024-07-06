@@ -22,7 +22,8 @@ fromemail="mariabackupalerts@6emaildomain.com"
 #0= just today's backup | 1= today and yesterday | 2=today,yesterday,day before etc
 backupdays=2
 
-#dump table sturture per for single database restores (full innodb databases only)
+#Dump table sturture per for single database restores (full innodb databases only)
+#To be used along with with --export option for the --prepare command to restore single tables (you need to table sturture to restore single tables)
 dumpstructure='n'
 
 #----------define backup options------------
