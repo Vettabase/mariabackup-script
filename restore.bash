@@ -1,4 +1,6 @@
 #!/bin/bash
+#WARNING it would be best to restore manully 
+#This was included if you are test backups as it can be annoying to type out the same commands over and over
 
 #location of fullbackup with incremental changes applied
 backup_dir="$1"
