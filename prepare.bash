@@ -1,7 +1,8 @@
 #!/bin/bash
-#Only to be run if a incremental backup is taken, if not then run prepare script manually
+#Only to be run if an incremental backup has been taken, if no incremental then prepare backup manually
 #To run do 
 #bash prepare.bash /path/to/backup/directory 
+#include --export for single table restores ($2 variable)
 #script will then look for fullbackup folder and loop through the incremental backups in order
 #do not run if no incremental backups have been taken, run prepare manually
 
@@ -36,7 +37,7 @@ else
     echo "$(date +'%Y-%m-%d %H:%M:%S') First time running prepare. running process as normal"
 fi
 
-# Change directory, unzip file and run prepare fullbackup
+# Change directory, unzip file and prepare fullbackup
 cd $FULL_BACKUP_DIR
 unpigz -c $FULL_BACKUP_DIR/* | mbstream -x
 mariabackup --prepare --target-dir=$FULL_BACKUP_DIR 2>> $preparelog
