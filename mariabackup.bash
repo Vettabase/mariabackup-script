@@ -36,7 +36,6 @@ declare -a backup_options_inc=(
 		"--incremental-basedir=$extra_lsndir"
 		"--stream=xbstream"
 		"--slave-info"
-		"--parallel=1"
 		)
 
 #full backup options
@@ -48,7 +47,6 @@ declare -a backup_options_full=(
         "--extra-lsndir=$extra_lsndir"
         "--stream=xbstream"
 		"--slave-info"
-		"--parallel=1"
         )
 
 #------------variables------------
