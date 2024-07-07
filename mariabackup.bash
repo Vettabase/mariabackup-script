@@ -122,7 +122,7 @@ else
 			rm -rf $incremental_folder
 			echo "$(date +'%Y-%m-%d %H:%M:%S') mariabackup failed - file $incremental_folder deleted" >> $current_date_folder/backup_status.log
 		else 
-			echo "$(date +'%Y-%m-%d %H:%M:%S') Full backup failed, please reslove issue and rerun backup" >> $current_date_folder/backup_status.log
+			echo "$(date +'%Y-%m-%d %H:%M:%S') Full backup failed, please resolve issue and rerun backup" >> $current_date_folder/backup_status.log
 		fi
 fi	
 

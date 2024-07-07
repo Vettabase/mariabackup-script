@@ -1,7 +1,7 @@
 # mariabackup-script
 ## Full and incremental script along with prepare script to uncompress and apply incremental backups to full backup ##
 
-Parts of the scripts are standard to Rehat/yum distros which means you may find that you need to change tools used in the script to better suit your OS. You may need to install pigz, or change it to gzip and gunzip.
+Parts of the scripts are standard to Redhat/yum distros which means you may find that you need to change tools used in the script to better suit your OS. You may need to install pigz, or change it to gzip and gunzip.
 
 ### This script has the following features: ###
 
@@ -65,7 +65,7 @@ Do not change, will break script|
 
 #### options: ####
 
-You have options for full and incremental backups. Having two sets of options allows you to have lots of Parrel threads for the full backup early in the morning and a few in working hours to stop the database becoming slow during the day as incremental backups shouldn't take long to complete
+You have options for full and incremental backups. Having two sets of options allows you to have lots of parallel threads for the full backup early in the morning and a few in working hours to stop the database becoming slow during the day as incremental backups shouldn't take long to complete
 
 ```bash
 #----------define backup options------------
