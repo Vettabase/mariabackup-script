@@ -7,24 +7,15 @@
 #create user 'backup'@'localhost' identified by 'password';
 #grant select,reload,process,lock tables,binlog monitor,connection admin,slave monitor on *.* to 'backup'@'localhost';
 
-# Define the backup directory
-backup_dir=/media/backups/
-
-# Define the mariadb user and password
-user=backup
-password=password
-
-#emaillist, spaces in-between, no commas
-emails="email@emaildomain.com"
-fromemail="mariabackupalerts@6emaildomain.com"
-
-#number of days to keep backups
-#0= just today's backup | 1= today and yesterday | 2=today,yesterday,day before etc
-backupdays=2
-
-#Dump table sturture per for single database restores (full innodb databases only)
-#To be used along with with --export option for the --prepare command to restore single tables (you need to table sturture to restore single tables)
-dumpstructure='n'
+# a configuration file should be in the same directory as this script
+# (regardless our current directory).
+# if it doesn't exist, we create it from the template, so we use
+# the default values.
+# then we include the file.
+here="`dirname \"$0\"`"
+here=`( cd "$here" && pwd )`
+cp conf.bash.template conf.bash 2> /dev/null
+source $here/conf.bash
 
 #----------define backup options------------
 #incremental options
@@ -36,7 +27,6 @@ declare -a backup_options_inc=(
 		"--incremental-basedir=$extra_lsndir"
 		"--stream=xbstream"
 		"--slave-info"
-		"--parallel=1"
 		)
 
 #full backup options
@@ -48,7 +38,6 @@ declare -a backup_options_full=(
         "--extra-lsndir=$extra_lsndir"
         "--stream=xbstream"
 		"--slave-info"
-		"--parallel=1"
         )
 
 #------------variables------------

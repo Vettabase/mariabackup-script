@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# conf.bash.template contains the defaults.
+# You can copy it to conf.bash and modify values according to your needs.
+# If you don't, mariabackup.bash will create a conf.bash file automatically.
+# conf.bash.template is versioned.
+# conf.bash is not versioned.
+
+# Define the backup directory
+backup_dir=/media/backups/
+
+# Define the mariadb user and password
+user=backup
+password=password
+
+#emaillist, spaces in-between, no commas
+emails="email@emaildomain.com"
+fromemail="mariabackupalerts@6emaildomain.com"
+
+#number of days to keep backups
+#0= just today's backup | 1= today and yesterday | 2=today,yesterday,day before etc
+backupdays=2
+
+#Dump table sturture per for single database restores (full innodb databases only)
+#To be used along with with --export option for the --prepare command to restore single tables (you need to table sturture to restore single tables)
+dumpstructure='n'
